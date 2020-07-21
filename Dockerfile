@@ -1,12 +1,12 @@
 ### START BUILD ###
 ARG ARCH=
-FROM ${ARCH}ubuntu:18.04 as builder
+FROM ${ARCH}debian:buster-slim as builder
 
 # install dependencies
 RUN apt update
 RUN apt install -y curl
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
-RUN apt install -y nodejs build-essential git wget make gcc g++ libbluetooth-dev libudev-dev
+RUN apt install -y nodejs npm build-essential git wget make gcc g++ libbluetooth-dev libudev-dev
 
 WORKDIR /home/pi/EspruinoHub
 RUN git clone --depth=1 https://github.com/espruino/EspruinoHub.git .
@@ -15,7 +15,7 @@ RUN npm install
 
 
 ### START RUNTIME ###
-FROM ${ARCH}ubuntu:18.04
+FROM ${ARCH}debian:buster-slim
 # Add non root user
 ARG USER=pi
 ARG UID=1000
@@ -27,7 +27,7 @@ RUN useradd -m ${USER} --uid=${UID}
 RUN apt update && \
     apt install -y curl && \
     curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
-    apt install -y nodejs mosquitto-clients \
+    apt install -y nodejs npm mosquitto-clients \
         bluetooth bluez libcap2-bin && \
     rm -rf /var/lib/apt/lists/*
 
