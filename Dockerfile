@@ -1,43 +1,26 @@
-### START BUILD ###
-ARG ARCH=
-FROM ${ARCH}debian:buster-slim as builder
+#FROM ${ARCH}debian:buster-slim
+FROM ${ARCH}node:lts-buster-slim
 
-# install dependencies
-RUN apt update
-RUN apt install -y curl
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
-RUN apt install -y nodejs npm build-essential git wget make gcc g++ libbluetooth-dev libudev-dev
+LABEL Maintainer="werty1st"
 
-WORKDIR /home/pi/EspruinoHub
-RUN git clone --depth=1 https://github.com/espruino/EspruinoHub.git .
-RUN npm install
-### ENDE BUILD ###
-
-
-### START RUNTIME ###
-FROM ${ARCH}debian:buster-slim
-# Add non root user
-ARG USER=pi
 ARG UID=1000
 ARG GID=1000
 
-RUN useradd -m ${USER} --uid=${UID}
+WORKDIR /home/pi/EspruinoHub
 
 # install dependencies
-RUN apt update && \
-    apt install -y curl && \
-    curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
-    apt install -y nodejs npm mosquitto-clients \
-        bluetooth bluez libcap2-bin && \
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends mosquitto-clients \
+        bluetooth bluez libcap2-bin \
+        git wget make gcc g++ libbluetooth-dev libudev-dev build-essential ca-certificates python && \
+    git clone --depth=1 'https://github.com/espruino/EspruinoHub.git' /home/pi/EspruinoHub && \
+    yarn install && \
+    apt-get remove -y git wget make gcc g++ libbluetooth-dev libudev-dev build-essential ca-certificates python && \    
     rm -rf /var/lib/apt/lists/*
 
 RUN setcap cap_net_raw+eip $(eval readlink -f `which node`)
 
-# install Hub
-COPY --from=builder /home/pi/EspruinoHub /home/pi/EspruinoHub
-WORKDIR /home/pi/EspruinoHub
 RUN chown -R ${UID}:${GID} .
-
 USER ${UID}:${GID}
 
 CMD [ "node", "index.js" ]
