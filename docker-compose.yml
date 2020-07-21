@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+  hub:
+    image: werty1st/espruinohub
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    privileged: true
+    environment:
+      - BLENO_ADVERTISING_INTERVAL=300
+      - NOBLE_MULTI_ROLE=1
+      - BLENO_HCI_DEVICE_ID=0
+    volumes:
+      - /dev:/dev
+    network_mode: host
+
+
+  mqtt:
+    restart: always
+    image: eclipse-mosquitto
+    ports:
+      - 1883:1883
