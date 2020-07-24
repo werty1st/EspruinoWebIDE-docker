@@ -22,5 +22,5 @@ jobs:
         with:
           destination_container_repo: werty1st/espruinowebide
           provider: dockerhub
-          short_description: 'my short description 😊'
+          short_description: ''
           readme_file: 'README.md'
