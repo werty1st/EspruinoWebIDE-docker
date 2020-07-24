@@ -37,7 +37,8 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 ## Run the image
 
-The images can run alone or togeher if 2 bluetooth devices are present. One images needs to set the environment variable __BLENO_HCI_DEVICE_ID__ to __0__ and the other to __1__.
+The images can run alone or togeher if 2 bluetooth devices are present.
+One images needs to set the environment variable __BLENO_HCI_DEVICE_ID__ to __0__ and the other to __1__.
 
 ### Docker
 
@@ -144,6 +145,18 @@ services:
 ```bash
 docker-compose up
 ```
+
+## About
+
+The image is a multi arch image to have more portable code (yml files).
+
+It's build for __linux/amd64__, __linux/arm/v7__ and __linux/arm64__. So it should run on Raspbery Pi 2,3,4 and also Intel/AMD x64 Linux systems.
+
+## Security
+
+For me this docker configuration was the most stable so far. It may be possible to restrict access more but its not one of my priorities.
+
+## PRs welcome
 
 ## Disclaimer
 
