@@ -1,11 +1,8 @@
 version: "3.7"
 
 services:
-  hub:
-    image: werty1st/espruinowebide
-    build:
-      context: .
-      dockerfile: Dockerfile
+  ide:
+    image: werty1st/espruinowebide:latest
     restart: always
     privileged: true
     environment:

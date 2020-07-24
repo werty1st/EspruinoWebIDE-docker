@@ -22,4 +22,10 @@ jobs:
              --tag werty1st/espruinowebide:latest
              --platform linux/amd64,linux/arm/v7,linux/arm64 .
 
+      - name: Docker Hub Description
+        uses: peter-evans/dockerhub-description@v2
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKERHUB_REPOSITORY: werty1st/espruinowebide
         
