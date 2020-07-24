@@ -7,7 +7,6 @@ One for the Hub and one for the IDE.
 
 It would have been easy to put them all in one but I didn't want to include extra code to make it configurable if one wants to use both or only one of the included programs.
 
-
 ## Preconditions
 
 Install Docker on a RPI:
