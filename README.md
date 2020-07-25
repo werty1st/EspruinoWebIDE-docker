@@ -51,7 +51,7 @@ docker run -it --rm \
     --privileged \
     --network=host \
     --volume=/dev:/dev \
-    werty1st/espruinohub:latest
+    werty1st/espruinowebide:latest
 ```
 
 ### docker-compose.yml
