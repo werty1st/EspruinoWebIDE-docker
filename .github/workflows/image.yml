@@ -2,9 +2,14 @@ name: build our image
 
 on:
   push:
-    branches: master
+    branches:
+      - master
     paths:
       - Dockerfile
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # run every sunday as long as no cache or webhook in configured
+    - cron:  '0 0 * * 0'      
 
 jobs:
   build:

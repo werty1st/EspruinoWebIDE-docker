@@ -87,7 +87,7 @@ services:
     privileged: true
     environment:
       - BLENO_ADVERTISING_INTERVAL=300
-      - NOBLE_MULTI_ROLE=1
+    # - NOBLE_MULTI_ROLE=1              #https://github.com/espruino/EspruinoHub#http-proxy
       - BLENO_HCI_DEVICE_ID=0
     volumes:
       - /dev:/dev
