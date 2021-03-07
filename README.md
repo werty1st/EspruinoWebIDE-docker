@@ -142,7 +142,7 @@ services:
       - BLENO_HCI_DEVICE_ID=0
     volumes:
       - /dev:/dev
-      - config.json:/home/pi/EspruinoHub/config.json
+      - ./config.json:/home/pi/EspruinoHub/config.json
     network_mode: host
 ```
 ```bash
