@@ -31,4 +31,3 @@ RUN chown -R ${UID}:${GID} .
 USER ${UID}:${GID}
 
 CMD [ "node", "server.js" ]
-
