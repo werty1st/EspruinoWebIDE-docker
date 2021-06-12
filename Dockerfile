@@ -18,11 +18,12 @@ WORKDIR /home/pi/EspruinoWebIDE
 # install dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        bluetooth bluez libcap2-bin \
+        bluetooth bluez libcap2-bin jq moreutils \
         git wget make gcc g++ libbluetooth-dev libudev-dev build-essential ca-certificates python && \
-    git clone --depth=1 --recursive 'https://github.com/espruino/EspruinoWebIDE.git' /home/pi/EspruinoWebIDE && \
-    yarn install && \
-    apt-get remove -y git wget make gcc g++ libbluetooth-dev libudev-dev build-essential ca-certificates python && \    
+    git clone --depth=1 --recurse-submodules 'https://github.com/espruino/EspruinoWebIDE.git' /home/pi/EspruinoWebIDE && \
+    cat /home/pi/EspruinoWebIDE/package.json | jq 'del(.dependencies.nw)' | sponge /home/pi/EspruinoWebIDE/package.json && \
+    npm install && \
+    apt-get remove -y git wget make gcc g++ libbluetooth-dev libudev-dev build-essential ca-certificates python jq moreutils && \    
     rm -rf /var/lib/apt/lists/*
 
 RUN setcap cap_net_raw+eip $(eval readlink -f `which node`)
