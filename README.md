@@ -1,6 +1,8 @@
-![build our image](https://github.com/werty1st/EspruinoHub-docker/workflows/build%20our%20image/badge.svg)
+[![build our image](https://github.com/werty1st/EspruinoWebIDE-docker/actions/workflows/image.yml/badge.svg)](https://github.com/werty1st/EspruinoWebIDE-docker/actions/workflows/image.yml)
 [![](https://images.microbadger.com/badges/image/werty1st/espruinowebide.svg)](https://microbadger.com/images/werty1st/espruinowebide "Get your own image badge on microbadger.com")
 [![](https://images.microbadger.com/badges/version/werty1st/espruinowebide.svg)](https://microbadger.com/images/werty1st/espruinowebide "Get your own version badge on microbadger.com")
+
+
 
 # Motivation
 
